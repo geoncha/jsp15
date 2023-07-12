@@ -5,24 +5,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import customer.controller.Controller;
 import customer.dao.NoticeDao;
-import customer.vo.Notice;
 
-public class NoticeEditController implements Controller{
+public class NoticeDelProcController implements Controller{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-System.out.println("NoticeEditController!!!!!!!!!");
+System.out.println("NoticeDelProcController!!!!!!!!!");
 		
 		String seq=request.getParameter("c");
 
 		NoticeDao dao = new NoticeDao();
-		Notice n = dao.getNotice(seq);
+		int del=dao.delete(seq);
+
+		//System.out.println("del cnt : "+del);
+
+		if(del>0)
+			response.sendRedirect("notice.do");
+		else
+			System.out.println("삭제 오류");
+			//out.write("삭제 오류");
 		
-		/* forward처리 */
-		request.setAttribute("n", n);
-		request.getRequestDispatcher("noticeEdit.jsp").forward(request, response);
 	}
 
-	
 }

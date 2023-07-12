@@ -7,13 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import customer.controller.notice.NoticeController;
+import customer.controller.notice.NoticeDelProcController;
 import customer.controller.notice.NoticeDetailController;
+import customer.controller.notice.NoticeEditController;
+import customer.controller.notice.NoticeEditProcController;
+import customer.controller.notice.NoticeRegController;
+import customer.controller.notice.NoticeRegProcController;
 
-public class MyDispatcher extends HttpServlet{
-	
+public class MyDispatcher extends HttpServlet {
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		System.out.println("http 신호");
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
@@ -21,13 +28,23 @@ public class MyDispatcher extends HttpServlet{
 		String com = uri.substring(conPath.length());
 		System.out.println(com);
 
-
-
 		Controller controller = null;
-		
+
 		try {
 			if (com.equals("/customer/noticeDetail.do")) {
-				controller=new NoticeDetailController();
+				controller = new NoticeDetailController();
+			}else if (com.equals("/customer/noticeEdit.do")) {
+				controller = new NoticeEditController();
+			}else if (com.equals("/customer/noticeEditProc.do")) {
+				controller = new NoticeEditProcController();
+			}else if (com.equals("/customer/noticeReg.do")) {
+				controller = new NoticeRegController();
+			}else if (com.equals("/customer/noticeRegProc.do")) {
+				controller = new NoticeRegProcController();
+			}else if (com.equals("/customer/noticeDelProc.do")) {
+				controller = new NoticeDelProcController();
+			}else if (com.equals("/customer/notice.do")) {
+				controller = new NoticeController();
 			}
 			controller.execute(request, response);
 		} catch (Exception e) {
