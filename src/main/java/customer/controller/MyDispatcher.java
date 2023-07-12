@@ -17,38 +17,35 @@ import customer.controller.notice.NoticeRegProcController;
 
 public class MyDispatcher extends HttpServlet {
 
+	private Controller controller;
+
+	public MyDispatcher() {
+		controller = null;
+	}
+
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println("http 신호");
 		String uri = request.getRequestURI();
-		String conPath = request.getContextPath();
+		String ctxPath = request.getContextPath();
+		String com = uri.substring(ctxPath.length());
 
-		String com = uri.substring(conPath.length());
-		System.out.println(com);
+		System.out.println(com); // 확인용
 
-		Controller controller = null;
+		switch (com) {
+		case "/customer/notice.do":
+			controller = new NoticeController();
+			break;
+		case "/customer/noticeReg.do":
+			controller = new NoticeController();
+			break;
+		}
 
 		try {
-			if (com.equals("/customer/noticeDetail.do")) {
-				controller = new NoticeDetailController();
-			}else if (com.equals("/customer/noticeEdit.do")) {
-				controller = new NoticeEditController();
-			}else if (com.equals("/customer/noticeEditProc.do")) {
-				controller = new NoticeEditProcController();
-			}else if (com.equals("/customer/noticeReg.do")) {
-				controller = new NoticeRegController();
-			}else if (com.equals("/customer/noticeRegProc.do")) {
-				controller = new NoticeRegProcController();
-			}else if (com.equals("/customer/noticeDelProc.do")) {
-				controller = new NoticeDelProcController();
-			}else if (com.equals("/customer/notice.do")) {
-				controller = new NoticeController();
-			}
 			controller.execute(request, response);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
