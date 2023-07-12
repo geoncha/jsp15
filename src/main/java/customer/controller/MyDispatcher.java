@@ -8,12 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import customer.controller.notice.NoticeController;
-import customer.controller.notice.NoticeDelProcController;
-import customer.controller.notice.NoticeDetailController;
-import customer.controller.notice.NoticeEditController;
-import customer.controller.notice.NoticeEditProcController;
-import customer.controller.notice.NoticeRegController;
-import customer.controller.notice.NoticeRegProcController;
 
 public class MyDispatcher extends HttpServlet {
 
