@@ -9,6 +9,5 @@
 <body>
 <h3>index.jsp</h3>
 <a href="customer/notice.do">notice</a>
-
 </body>
 </html>
