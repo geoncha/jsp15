@@ -7,20 +7,22 @@ import customer.controller.Controller;
 import customer.dao.NoticeDao;
 import customer.vo.Notice;
 
-public class NoticeDetailController implements Controller{
+public class NoticeEditController implements Controller{
 
+	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("NoticeDetailController!!!!!!!!!!");
+		// TODO Auto-generated method stub
+System.out.println("NoticeEditController!!!!!!!!!");
 		
 		String seq=request.getParameter("c");
-		String hit=request.getParameter("h");
-		System.out.println("hit : "+hit);
+
 		NoticeDao dao = new NoticeDao();
-		Notice n = dao.getNotice(seq,hit);
+		Notice n = dao.getNotice(seq);
 		
 		/* forward처리 */
 		request.setAttribute("n", n);
-		request.getRequestDispatcher("noticeDetail.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("noticeEdit.jsp").forward(request, response);
 	}
+
+	
 }
